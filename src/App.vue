@@ -1,17 +1,27 @@
 <template>
 	<!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-	<chatRoom />
+	<!-- <div>
+		<ChatRoom />
+		<loginPage />
+	</div> -->
+	<nav>
+		<router-link to="/">Home</router-link> |
+		<router-link to="/about">About</router-link>
+	</nav>
+	<router-view />
 </template>
 
 <script>
-import chatRoom from './components/chatRoom.vue';
-import login from './components/login.vue';
+import loginPage from './components/loginPage.vue';
+// import ChatRoom from './components/chatRoom.vue';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap';
 
 export default {
 	name: 'App',
 	components: {
-		chatRoom,
-		login,
+		loginPage,
+		// ChatRoom,
 	},
 };
 </script>
@@ -22,7 +32,7 @@ export default {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
-	color: #2c3e50;
+	/* color: #2c3e50; */
 	/* margin-top: 60px; */
 }
 </style>
