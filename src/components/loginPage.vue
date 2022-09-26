@@ -16,7 +16,7 @@
 						<h1>請輸入帳號密碼</h1>
 						<form class="form-group">
 							<input
-								v-model="emailLogin"
+								v-model="loginAccount"
 								type="text"
 								class="form-control"
 								placeholder="帳號"
@@ -64,7 +64,7 @@
 						<h1>創建一個帳戶</h1>
 						<form class="form-group">
 							<input
-								v-model="emailReg"
+								v-model="accountReg"
 								type="text"
 								class="form-control"
 								placeholder="帳號"
@@ -121,9 +121,9 @@ export default {
 	data() {
 		return {
 			registerActive: false,
-			emailLogin: '',
-			passwordLogin: '',
-			emailReg: '',
+			loginAccount: 'user001',
+			passwordLogin: 'user001',
+			accountReg: '',
 			passwordReg: '',
 			confirmReg: '',
 			emptyFields: false,
@@ -132,17 +132,43 @@ export default {
 
 	methods: {
 		doLogin() {
-			if (this.emailLogin === '' || this.passwordLogin === '') {
+			if (this.loginAccount === '' || this.passwordLogin === '') {
 				this.emptyFields = true;
 			} else {
 				// alert('You are now logged in');
-				this.$router.replace('/');
+				const api = `http://192.168.8.166:3000/login`;
+				const user = {
+					account: this.loginAccount,
+					password: this.passwordLogin,
+				};
+				// console.log(user);
+				const that = this;
+				// axios
+				// 	.get(api, user)
+				// 	.then(response => {
+				// 		console.log(response);
+				// 		if (response.data.success === true) {
+				// 			that.$router.push('/login');
+				// 		}
+				// 	})
+				// 	.catch(function (error) {
+				// 		console.log('連線異常');
+				// 	});
+				axios
+					.post(api, user)
+					.then(function (response) {
+						console.log(response);
+						that.$router.replace('/');
+					})
+					.catch(function (error) {
+						console.log(error);
+					});
 			}
 		},
 
 		doRegister() {
 			if (
-				this.emailReg === '' ||
+				this.accountReg === '' ||
 				this.passwordReg === '' ||
 				this.confirmReg === ''
 			) {
