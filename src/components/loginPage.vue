@@ -40,18 +40,19 @@
 							>
 								登入
 							</button>
+
 							<p>
-								Don't have an account?
+								你有帳戶嗎??
 								<a
 									href="#"
 									@click="
 										(registerActive = !registerActive),
 											(emptyFields = false)
 									"
-									>Sign up here</a
+									>點選這裡創建一個帳戶</a
 								>
 							</p>
-							<p><a href="#">Forgot your password?</a></p>
+							<p><a href="#">忘記密碼?</a></p>
 						</form>
 					</div>
 
@@ -95,14 +96,13 @@
 								登入
 							</button>
 							<p>
-								Already have an account?
 								<a
 									href="#"
 									@click="
 										(registerActive = !registerActive),
 											(emptyFields = false)
 									"
-									>Sign in here</a
+									>點選登入</a
 								>
 							</p>
 						</form>
@@ -135,7 +135,8 @@ export default {
 			if (this.emailLogin === '' || this.passwordLogin === '') {
 				this.emptyFields = true;
 			} else {
-				alert('You are now logged in');
+				// alert('You are now logged in');
+				this.$router.replace('/');
 			}
 		},
 
@@ -147,7 +148,7 @@ export default {
 			) {
 				this.emptyFields = true;
 			} else {
-				alert('You are now registered');
+				alert('此帳號已經註冊!!');
 			}
 		},
 	},

@@ -4,16 +4,17 @@
 		<ChatRoom />
 		<loginPage />
 	</div> -->
-	<nav>
-		<router-link to="/">Home</router-link> |
-		<router-link to="/about">About</router-link>
-	</nav>
+	<!-- <nav>
+		<router-link to="/">chatRoom</router-link> |
+		<router-link to="/login">登入</router-link>
+	</nav> -->
+	<!-- <loginPage /> -->
 	<router-view />
 </template>
 
 <script>
 import loginPage from './components/loginPage.vue';
-// import ChatRoom from './components/chatRoom.vue';
+import ChatRoom from './components/chatRoom.vue';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
 
@@ -21,7 +22,7 @@ export default {
 	name: 'App',
 	components: {
 		loginPage,
-		// ChatRoom,
+		ChatRoom,
 	},
 };
 </script>
