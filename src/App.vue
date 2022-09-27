@@ -4,10 +4,10 @@
 		<ChatRoom />
 		<loginPage />
 	</div> -->
-	<!-- <nav>
+	<nav>
 		<router-link to="/">chatRoom</router-link> |
 		<router-link to="/login">登入</router-link>
-	</nav> -->
+	</nav>
 	<!-- <loginPage /> -->
 	<router-view />
 </template>

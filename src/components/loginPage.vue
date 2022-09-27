@@ -113,6 +113,8 @@
 	</div>
 </template>
 <script>
+import axios from 'axios';
+
 export default {
 	name: 'loginPage',
 	props: {
@@ -135,33 +137,29 @@ export default {
 			if (this.loginAccount === '' || this.passwordLogin === '') {
 				this.emptyFields = true;
 			} else {
-				// alert('You are now logged in');
-				const api = `http://192.168.8.166:3000/login`;
-				const user = {
-					account: this.loginAccount,
-					password: this.passwordLogin,
-				};
-				// console.log(user);
-				const that = this;
-				// axios
-				// 	.get(api, user)
-				// 	.then(response => {
-				// 		console.log(response);
-				// 		if (response.data.success === true) {
-				// 			that.$router.push('/login');
-				// 		}
-				// 	})
-				// 	.catch(function (error) {
-				// 		console.log('連線異常');
-				// 	});
-				axios
-					.post(api, user)
+				this.$router.replace('/');
+				const bodyFormData = new FormData();
+				bodyFormData.append('account', this.loginAccount);
+				bodyFormData.append('password', this.passwordLogin);
+
+				const apiURL = 'http://192.168.8.166:3000/login'; // origin api url
+				// api call
+				// console.log(bodyFormData.getAll('password'));
+				// console.log(this.loginData());
+				// this.loginData();
+				axios({
+					method: 'post',
+					url: `${apiURL}`,
+					data: bodyFormData,
+					// headers: { 'Content-Type': 'multipart/form-data' },
+				})
 					.then(function (response) {
+						//handle success
 						console.log(response);
-						that.$router.replace('/');
 					})
-					.catch(function (error) {
-						console.log(error);
+					.catch(function (response) {
+						//handle error
+						console.log(response);
 					});
 			}
 		},
@@ -176,6 +174,25 @@ export default {
 			} else {
 				alert('此帳號已經註冊!!');
 			}
+		},
+		async loginData() {
+			const loginedData = await axios({
+				method: 'post',
+				url: 'http://192.168.8.166:3000/login',
+				data: {
+					account: 'user005',
+					password: 'user005',
+				},
+			})
+				.then(res => {
+					// console.table(res.data);
+					return res.data;
+				})
+				.catch(error => {
+					// console.error(error);
+					return error;
+				});
+			return loginedData;
 		},
 	},
 };
